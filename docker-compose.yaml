@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  jenkins:
+    build:
+      context: ./jenkins
+    container_name: jenkins_server
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock #very impostant for controlling docker
+
+volumes:
+  jenkins_home:
