@@ -1,0 +1,7 @@
+github
+docker-plugin
+docker-workflow
+pipeline-github
+blueocean
+workflow-aggregator
+ws-cleanup

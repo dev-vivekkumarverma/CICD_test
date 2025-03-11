@@ -2,15 +2,26 @@ version: '3.8'
 
 services:
   jenkins:
-    build:
-      context: ./jenkins
-    container_name: jenkins_server
+    build: .
+    container_name: jenkins
+    user: root
     ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock #very impostant for controlling docker
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jenkins-network
+
+networks:
+  jenkins-network:
+    driver: bridge
 
 volumes:
-  jenkins_home:
+  jenkins-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/home/verma-tv/cicd/CICD_test/jenkins"
+      o: bind,rw
